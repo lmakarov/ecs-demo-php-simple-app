@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM drupal:8.7.3-apache
 
 # Copy app code
-COPY src /var/www/html/
+#COPY src /var/www/html/

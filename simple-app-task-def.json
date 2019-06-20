@@ -1,16 +1,9 @@
 {
-    "family": "console-sample-app",
-    "volumes": [
-        {
-            "name": "my-vol",
-            "host": {}
-        }
-    ],
+    "family": "drupal",
     "containerDefinitions": [
         {
-            "environment": [],
-            "name": "simple-app",
-            "image": "amazon/amazon-ecs-sample",
+            "name": "drupal-apache",
+            "image": "drupal:8.7.3-apache",
             "cpu": 10,
             "memory": 500,
             "portMappings": [
@@ -19,33 +12,8 @@
                     "hostPort": 80
                 }
             ],
-            "mountPoints": [
-                {
-                    "sourceVolume": "my-vol",
-                    "containerPath": "/var/www/my-vol"
-                }
-            ],
-            "entryPoint": ["docker-php-entrypoint"],
-            "essential": true
-        },
-        {
-            "name": "busybox",
-            "image": "busybox",
-            "cpu": 10,
-            "memory": 500,
-            "volumesFrom": [
-            {
-              "sourceContainer": "simple-app"
-            }
-            ],
-            "entryPoint": [
-                "sh",
-                "-c"
-            ],
-            "command": [
-                "/bin/sh -c \"while true; do /bin/date > /var/www/my-vol/date; sleep 1; done\""
-            ],
-            "essential": false
+            "essential": true,
+            "environment": []
         }
     ]
 }
